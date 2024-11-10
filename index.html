@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGP Key Generator & Encrypt/Decrypt</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/openpgp@5.5.0/dist/openpgp.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="main-container">
+        <h1>PGP Tool</h1>
+        
+        <div class="menu">
+            <button onclick="showSection('generate')">Generate Keys</button>
+            <button onclick="showSection('encrypt')">Encrypt Message</button>
+            <button onclick="showSection('decrypt')">Decrypt Message</button>
+        </div>
+        
+        <div id="generate" class="section" style="display: none;">
+            <h2>Generate Random PGP Keys</h2>
+            <button onclick="generateKeys()">Generate Keys</button>
+            <p>Public Key:</p>
+            <div class="copy-container">
+                <textarea id="publicKey" readonly></textarea>
+                <button onclick="copyToClipboard('publicKey')">Copy</button>
+            </div>
+            <p>Private Key:</p>
+            <div class="copy-container">
+                <textarea id="privateKey" readonly></textarea>
+                <button onclick="copyToClipboard('privateKey')">Copy</button>
+            </div>
+        </div>
+
+        <div id="encrypt" class="section" style="display: none;">
+            <h2>Encrypt Message</h2>
+            <textarea id="messageToEncrypt" placeholder="Enter message here..."></textarea>
+            <textarea id="encryptPublicKey" placeholder="Enter public key here..."></textarea>
+            <button onclick="encryptMessage()">Encrypt</button>
+            <p>Encrypted Message:</p>
+            <div class="copy-container">
+                <textarea id="encryptedMessage" readonly></textarea>
+                <button onclick="copyToClipboard('encryptedMessage')">Copy</button>
+            </div>
+        </div>
+
+        <div id="decrypt" class="section" style="display: none;">
+            <h2>Decrypt Message</h2>
+            <textarea id="messageToDecrypt" placeholder="Enter encrypted message here..."></textarea>
+            <textarea id="decryptPrivateKey" placeholder="Enter private key here..."></textarea>
+            <button onclick="decryptMessage()">Decrypt</button>
+            <p>Decrypted Message:</p>
+            <div class="copy-container">
+                <textarea id="decryptedMessage" readonly></textarea>
+                <button onclick="copyToClipboard('decryptedMessage')">Copy</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Powered by <a href="https://eneskeremaydin.com.tr" target="_blank">EKA</a></p>
+    </footer>
+</body>
+</html>
