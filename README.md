@@ -29,7 +29,7 @@ A web-based tool to generate PGP keys, encrypt messages, and decrypt messages se
 
 ## Requirements
 
-- A modern web browser with JavaScript enabled.
+- A web browser with JavaScript enabled.
 - OpenPGP.js library (loaded via CDN in the HTML file).
 
 ## Disclaimer
