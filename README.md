@@ -14,7 +14,7 @@ A web-based tool to generate PGP keys, encrypt messages, and decrypt messages se
 
 1. **Clone or Download** the repository:
    ```bash
-   git clone https://github.com/yourusername/pgp-tool.git
+   git clone https://github.com/EnesKeremAYDIN/pgp-tool.git
    cd pgp-tool
    ```
 
