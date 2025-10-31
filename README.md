@@ -1,6 +1,6 @@
 # PGP Key Generator & Encrypt/Decrypt Tool
 
-A web-based tool to generate PGP keys, encrypt messages, and decrypt messages securely using the OpenPGP.js library. This application allows users to manage PGP (Pretty Good Privacy) encryption and decryption operations directly from the browser.
+Web-based tool to generate PGP keys, encrypt messages, and decrypt messages securely using the OpenPGP.js library. This application allows users to manage PGP (Pretty Good Privacy) encryption and decryption operations directly from the browser.
 
 ## Features
 
@@ -53,3 +53,4 @@ This tool is intended for educational and personal use. Ensure proper security p
    - Navigate to the "Decrypt Message" section.
    - Paste the encrypted message and your private key.
    - Click "Decrypt" to reveal the original message.
+
