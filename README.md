@@ -32,10 +32,6 @@ Web-based tool to generate PGP keys, encrypt messages, and decrypt messages secu
 - A web browser with JavaScript enabled.
 - OpenPGP.js library (loaded via CDN in the HTML file).
 
-## Disclaimer
-
-This tool is intended for educational and personal use. Ensure proper security practices for storing and handling PGP keys.
-
 ---
 
 ### Usage Instructions
@@ -53,4 +49,5 @@ This tool is intended for educational and personal use. Ensure proper security p
    - Navigate to the "Decrypt Message" section.
    - Paste the encrypted message and your private key.
    - Click "Decrypt" to reveal the original message.
+
 
