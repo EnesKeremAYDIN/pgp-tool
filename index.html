@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGP Key Generator & Encrypt/Decrypt</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/openpgp@5.5.0/dist/openpgp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/openpgp@6.3.0/dist/openpgp.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -13,47 +13,90 @@
         <h1>PGP Tool</h1>
         
         <div class="menu">
-            <button onclick="showSection('generate')">Generate Keys</button>
-            <button onclick="showSection('encrypt')">Encrypt Message</button>
-            <button onclick="showSection('decrypt')">Decrypt Message</button>
+            <button data-section="generate" onclick="showSection('generate')">Generate Keys</button>
+            <button data-section="encrypt" onclick="showSection('encrypt')">Encrypt Message</button>
+            <button data-section="decrypt" onclick="showSection('decrypt')">Decrypt Message</button>
         </div>
         
         <div id="generate" class="section" style="display: none;">
             <h2>Generate Random PGP Keys</h2>
+            <div class="input-grid">
+                <div class="field-group">
+                    <label for="userName">Name</label>
+                    <input id="userName" type="text" placeholder="John Doe">
+                </div>
+                <div class="field-group">
+                    <label for="userEmail">Email</label>
+                    <input id="userEmail" type="email" placeholder="john@example.com">
+                </div>
+            </div>
+            <div class="input-grid">
+                <div class="field-group">
+                    <label for="generatePassphrase">Private key passphrase</label>
+                    <input id="generatePassphrase" type="password" placeholder="Use a strong passphrase">
+                </div>
+                <div class="field-group">
+                    <label for="confirmPassphrase">Confirm passphrase</label>
+                    <input id="confirmPassphrase" type="password" placeholder="Repeat passphrase">
+                </div>
+            </div>
             <button onclick="generateKeys()">Generate Keys</button>
+            <div id="generateStatus" class="status" aria-live="polite"></div>
             <p>Public Key:</p>
             <div class="copy-container">
                 <textarea id="publicKey" readonly></textarea>
                 <button onclick="copyToClipboard('publicKey')">Copy</button>
+                <button onclick="downloadTextFile('publicKey', 'public-key.txt')">Download TXT</button>
             </div>
             <p>Private Key:</p>
             <div class="copy-container">
                 <textarea id="privateKey" readonly></textarea>
                 <button onclick="copyToClipboard('privateKey')">Copy</button>
+                <button onclick="downloadTextFile('privateKey', 'private-key.txt')">Download TXT</button>
+            </div>
+            <p>Revocation Certificate:</p>
+            <div class="copy-container">
+                <textarea id="revocationCertificate" readonly></textarea>
+                <button onclick="copyToClipboard('revocationCertificate')">Copy</button>
+                <button onclick="downloadTextFile('revocationCertificate', 'revocation-certificate.txt')">Download TXT</button>
             </div>
         </div>
 
         <div id="encrypt" class="section" style="display: none;">
             <h2>Encrypt Message</h2>
+            <label for="messageToEncryptFile">Load plaintext from TXT:</label>
+            <input id="messageToEncryptFile" type="file" accept=".txt,text/plain" onchange="loadTextFileIntoField(event, 'messageToEncrypt')">
             <textarea id="messageToEncrypt" placeholder="Enter message here..."></textarea>
+            <label for="encryptPublicKeyFile">Load public key from TXT:</label>
+            <input id="encryptPublicKeyFile" type="file" accept=".txt,text/plain" onchange="loadTextFileIntoField(event, 'encryptPublicKey')">
             <textarea id="encryptPublicKey" placeholder="Enter public key here..."></textarea>
             <button onclick="encryptMessage()">Encrypt</button>
+            <div id="encryptStatus" class="status" aria-live="polite"></div>
             <p>Encrypted Message:</p>
             <div class="copy-container">
                 <textarea id="encryptedMessage" readonly></textarea>
                 <button onclick="copyToClipboard('encryptedMessage')">Copy</button>
+                <button onclick="downloadTextFile('encryptedMessage', 'encrypted-message.txt')">Download TXT</button>
             </div>
         </div>
 
         <div id="decrypt" class="section" style="display: none;">
             <h2>Decrypt Message</h2>
+            <label for="messageToDecryptFile">Load encrypted message from TXT:</label>
+            <input id="messageToDecryptFile" type="file" accept=".txt,text/plain" onchange="loadTextFileIntoField(event, 'messageToDecrypt')">
             <textarea id="messageToDecrypt" placeholder="Enter encrypted message here..."></textarea>
+            <label for="decryptPrivateKeyFile">Load private key from TXT:</label>
+            <input id="decryptPrivateKeyFile" type="file" accept=".txt,text/plain" onchange="loadTextFileIntoField(event, 'decryptPrivateKey')">
             <textarea id="decryptPrivateKey" placeholder="Enter private key here..."></textarea>
+            <label for="decryptPassphrase">Private key passphrase</label>
+            <input id="decryptPassphrase" type="password" placeholder="Required for protected private keys">
             <button onclick="decryptMessage()">Decrypt</button>
+            <div id="decryptStatus" class="status" aria-live="polite"></div>
             <p>Decrypted Message:</p>
             <div class="copy-container">
                 <textarea id="decryptedMessage" readonly></textarea>
                 <button onclick="copyToClipboard('decryptedMessage')">Copy</button>
+                <button onclick="downloadTextFile('decryptedMessage', 'decrypted-message.txt')">Download TXT</button>
             </div>
         </div>
     </div>

@@ -7,8 +7,6 @@ Web-based tool to generate PGP keys, encrypt messages, and decrypt messages secu
 - **Generate PGP Keys**: Create public and private PGP key pairs.
 - **Encrypt Messages**: Encrypt plaintext messages using a public key.
 - **Decrypt Messages**: Decrypt ciphertext messages using a private key.
-- **Copy to Clipboard**: Convenient buttons to copy generated keys and messages to the clipboard.
-- **User-friendly Interface**: Designed with an accessible layout using HTML, CSS, and JavaScript.
 
 ## Installation and Usage
 
